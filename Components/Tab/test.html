@@ -64,17 +64,16 @@
 	<div>2</div>
 	<div>3</div>
 </div>
-	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript" src="js/tab.js"></script>
 	<script type="text/javascript">
 		var a1 = new Tab();
-		a1.init("box1");
+		a1.init("#box1");
 
 		var a2 = new Tab();
-		a2.init("box2",{event:'mouseover'});
+		a2.init("#box2",{event:'mouseover'});
 
 		var a3 = new Tab();
-		a3.init("box3", { event:'mouseover', delay:150 });
+		a3.init("#box3", { event:'mouseover', delay:150 });
 	</script>
 </body>
 </html>

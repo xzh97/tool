@@ -12,32 +12,29 @@ function Tab(tabBox){
 	}
 }
 Tab.prototype.init = function(tabBox,options){
-	this.oParentBox = $('#'+tabBox);
-	this.oBtn = this.oParentBox.find("button");
-	this.oDiv = this.oParentBox.find("div");
+	this.oParentBox = document.querySelector(tabBox);
+	console.log(this.oParentBox.children);
+	this.oBtn = this.oParentBox.querySelectorAll("button");
+	this.oDiv = this.oParentBox.querySelectorAll("div");
 	var This = this;
 
 	for(var key in options){
-		if(key == 'event'){
-			this.settings[key] = options[key];
-		} else if (key == 'delay'){
-			this.settings[key] = options[key];
-		}
+		this.settings[key] = options[key];
 	}
 	for(var i=0; i<this.oBtn.length; i++){
 		this.oBtn[i].index = i;
+		this.oBtn[i].addEventListener(this.settings.event, function () {
+			var _this = this;
+			if (This.settings.delay) {
+				This.oTimer = setTimeout(function () {
+					This.change(_this);
+				}, This.settings.delay);
+			} else {
+				console.log("delay0");
+				This.change(this);
+			}
+		})
 	}
-	this.oBtn.on(this.settings.event,function(){
-		var _this = this;
-		if (This.settings.delay){
-			This.oTimer = setTimeout(function(){
-				This.change(_this);
-			}, This.settings.delay);
-		}else{
-			console.log("delay0");
-			This.change(this);
-		}	
-	})
 	
 }
 
