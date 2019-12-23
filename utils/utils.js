@@ -84,14 +84,9 @@ export function getItemRandom(arr){
  * @param {string} url
  */
 export function getURLParams(url){
-    let keyValArr = url.split('?')[1].split('&')
-    let params = {};
-    keyValArr.forEach(item => {
-        let key = item.split('=')[0];
-        let val = item.split('=')[1];
-        params[key] = val;
-    })
-    return params;
+    let param = {};
+    location.search.replace(/([^&=?]+)=([^&]+)/g,(m,$1,$2)=> param[$1] = $2);
+    return param;
 }
 /**
  * @desc 反转字符串
@@ -123,7 +118,7 @@ export function trim(str){
  * @param {string} str
  * @param {string} char
  */
-export function strToUnderline(str,cha = '_'){
+export function strToUnderline(str,char = '_'){
     return str.replace(/([A-Z])/g,`${char}$1`).toLowerCase();
 }
 
@@ -132,8 +127,8 @@ export function strToUnderline(str,cha = '_'){
  * @desc 去除前后空格
  * @param {string} str
  */
-export function trim(str){
-    return str.replace(/^\s+|\s+$/,"");
+export function underlineToStr(str){
+    return str.replace(/_(\w?)/g, (all,letter) => letter.toUpperCase());
 }
 export default {
     dateFormat,
@@ -145,4 +140,7 @@ export default {
     getURLParams,
     reverseStr,
     trim,
+    computeCharInStr,
+    strToUnderline,
+    underlineToStr,
 }
